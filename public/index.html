@@ -1,0 +1,314 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+	
+		<link rel="icon" href="tree.png" type="image/png">
+		<link href="./main-style.css" type="text/css" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Russo+One" rel="stylesheet">
+	<style>
+       #map {
+        height: 400px;
+        width: 100%;
+       }
+	   
+	   div{
+		font-size: 24px;
+		color: #0099E6;
+		font-family: impact;
+	   }
+		.textbox{
+			border: 4px solid #57A8F5;
+			width: 75%;
+			border-radius: 12px;
+			font-size: 27px;
+			background-image: url('search icon.png');
+			background-position: 5px 5px;
+			background-repeat: no-repeat;
+			background-size: 50px 50px;
+			padding:  10px 70px;
+		}
+		.searchButton{
+			border: 4px solid #57A8F5;
+			border-radius: 13px;
+			font-size: 35px;
+			font-family: arial;
+			transition-duration: 0.4s;
+			cursor: pointer;
+			padding: 5px 5px;
+			width: 11%;
+			margin: 4px 2px;
+		}
+		.searchButton:hover {
+			background-color: #06D2F2;
+			color: white;
+		}
+    </style>
+        <title>Project Influenza</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+		 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzu2qFswQx0QoeZAAAAVayeSeEH8AtHWg&callback=initMap"></script>
+        <script>
+    	    var url = window.location.href;
+        	var arr = url.split("/");
+        	var result = arr[0] + "//" + arr[2];
+    	    var socket = io.connect(result);
+			var rawData;
+			var lad;
+			var lon;
+			var check = 1;
+			
+			var latitudeArray = []
+			var longitudeArray = []
+			var tweetArray = []
+			
+			//socket.emit("start program")
+			socket.on("latitude", function(data){
+				console.log(data);
+				lad = data;
+			})
+			socket.on("longitude", function(data){
+				console.log(data);
+				lon = data;
+			})
+			//socket.emit("coordinates", lad)
+			//socket.emit("coordinates1", lon)
+			socket.on("FluLADLON", function(data){
+				rawData = data;
+				for(var i=0;i< rawData.length; i++)
+				{
+					latitudeArray[i] = Number(rawData[i].latitude)
+					longitudeArray[i] = Number(rawData[i].longitude)
+					tweetArray[i] = rawData[i].tweet_text
+					
+					console.log("asd1")
+				}
+				//data = data.breezometer_aqi
+				//testDiv.innerHTML="The Pollution Level is " + data + " out of 500";
+				mapContainer.innerHTML = "<div id='map'></div>"
+				initMap();
+			})
+			
+			
+			
+			
+			function test()
+			{
+				
+				//testDiv.innerHTML=rawData.breezometer_aqi
+				var userInput = idLocations.value;
+				console.log(userInput);
+				var userArray = userInput.split("");
+				console.log(userArray);
+				for(var i=0;i<=userArray.length;i++)
+				{
+					if(userArray[i] == " ")
+					{
+						userArray[i] = "+";
+					}
+				}
+				var userInput = userArray.join("");
+				console.log(userInput);
+				
+				socket.emit("location", userInput)
+				
+				
+			}
+			function initMap() {
+				var marker;
+				var map;
+				var uluru;
+				console.log(lad)
+				console.log(lon)
+				if(latitudeArray.length != 0) {
+				var lastIndex = latitudeArray.length + 1
+				latitudeArray[lastIndex] = lad;
+				longitudeArray[lastIndex] = lon;
+				tweetArray[lastIndex] = "Your point of interest"
+					for(var i=0;i< 3; i++){
+					//console.log(latitudeArray[i])
+					var map = new google.maps.Map(document.getElementById('map'), {
+					
+					zoom: 10,
+					center: new google.maps.LatLng(lad, lon),
+					mapTypeId: google.maps.MapTypeId.ROADMAP
+					});
+
+					var infowindow = new google.maps.InfoWindow();
+
+					var marker, i;
+					
+
+					for (i = 0; i < latitudeArray.length; i++)
+					{  
+						if(latitudeArray[i] < lad + 2 && latitudeArray[i] > lad - 2 && longitudeArray[i] < lon + 2 && longitudeArray[i] > lon - 2)
+						{
+						
+						  marker = new google.maps.Marker({
+							position: new google.maps.LatLng(latitudeArray[i], longitudeArray[i]),
+							map: map
+							// icon: HUE_BLUE
+							//'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'
+						  });
+
+						  google.maps.event.addListener(marker, 'click', (function(marker, i) {
+							return function() {
+							  infowindow.setContent(tweetArray[i]);
+							  infowindow.open(map, marker);
+							}
+						  })(marker, i));
+						}
+					}
+				
+				}
+				}
+			}
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			/* 
+			// Canvas context; used to call Canvas methods
+			var c;
+
+			// Canvas width and height.
+			var cWidth, cHeight;
+
+			// Stores the current keyboard state
+			var curkeys = [];
+			
+			// Stores keys that have been newly pressed since last update
+			var newkeys = [];
+			
+			
+			var rectImg;
+			
+			var gameState = "Start";
+			
+			
+			// Initializes entire game framework. This method should only be called
+			// once, by the body onload event handler.
+			function gameFrameworkInit(){	
+				
+				var arrayOfNumbers = "";
+				for(var i=1; i<= 118; i++){
+					arrayOfNumbers += i + " ";
+				}
+				atomicNumberArray = arrayOfNumbers.split(" ");
+				atomicNumberArray.splice(118, 1);
+			
+				
+				// Initialize key arrays
+				for (i = 0; i < 256; i++){
+					curkeys[i] = false;
+					newkeys[i] = false;
+				}
+			
+				// Initialize global variables for canvas
+				c = myCanvas.getContext('2d');
+				cWidth = myCanvas.width;
+				cHeight = myCanvas.height;
+
+
+				// Start listeners for getting keyboard state
+				window.addEventListener('keydown',
+										 function(e){
+											if (!curkeys[e.keyCode]){
+												curkeys[e.keyCode] = true;
+												newkeys[e.keyCode] = true;
+											}
+										 }
+									   );
+				
+				window.addEventListener('keyup',
+										 function(e){ curkeys[e.keyCode] = false; }
+									   );
+
+				// Schedule the update function to be called right before the next repaint.
+				// (At the end of the update function, it will schedule itself to be called
+				// again before the NEXT repaint, and so on.
+				
+				rectImg = new Image();
+				rectImg.src = "canvas.png"
+				rectImg.onload = function() {
+					window.requestAnimationFrame(gameUpdate);
+				}
+			}
+
+
+
+
+
+		
+			
+			function gameUpdate(){
+				// Reset newkeys
+				if(gameState == "Start")
+				{
+					if(newkeys[32])
+					{
+						idIntroScreen.innerHTML = 
+						gameState = "STOP";
+						idLocations.focus();
+					}
+				}
+				if(gameState == "STOP")
+				{
+					if(newkeys[13])
+					{
+						test();
+					}
+				
+				}
+				for (i = 0; i < 256; i++){
+					newkeys[i] = false;
+				}
+				// At the end of the update function, repaint the screen
+				gameDraw();
+					
+				// Last thing the update function does is to schedule itself to be called
+				// again before the next repaint
+				window.requestAnimationFrame(gameUpdate);
+			}
+		
+		function gameDraw(){
+			// Clear the canvas before we draw the current frame
+			c.clearRect(0,0,cWidth,cHeight);
+			c.drawImage(rectImg, 0, 0, cWidth, cHeight);
+	
+			
+		}*/
+		
+        </script>
+    </head>
+    <body>
+		<nav>
+        <a href="main-page.html"><h1 class="logo">Project Influenza</h1></a>
+        <ul class="navbar">
+            <li><a class="listitems1" href="map-page.html">Maps</a></li>
+            <li><a class="listitems2" href="test-page.html">Symptoms Test</a></li>
+            <li><a class="listitems3" href="about-page.html">About the Flu</a></li>
+        </ul>
+        </nav>
+		<center>
+		<div id='map'></div>
+		<!--<div id="idIntroScreen"><canvas id="myCanvas" width="1253" height="705" style="border:1px"></canvas></div>-->
+		<div id="mapContainer"></div>
+		<input id="idLocations" class="textbox" type="text" name="userSearch" placeholder="Find a place of interest...">
+		<br><br>
+		<p class="searchButton" id="userClick" onClick="test()">Search</p>
+		<br><br>
+		<div id="testDiv"></div><br><br>
+		</center>
+		<!--<input type=textbox id="idLocations">
+		<input type=button onClick="test()" value="Search">-->
+    </body>
+</html>

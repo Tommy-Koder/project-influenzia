@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link href="./main-style.css" type="text/css" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Russo+One" rel="stylesheet">
+		<title>Project Influenza</title>
+		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+		<script type="text/javascript">
+		  google.charts.load('current', {'packages':['bar']});
+		  google.charts.setOnLoadCallback(drawStuff);
+
+		  function drawStuff() {
+			var data = new google.visualization.arrayToDataTable([
+			  ['', 'Deaths'],
+			  ["2011-12", 37],
+			  ["2012-13", 171],
+			  ["2013-14", 105],
+			  ["2014-15", 148],
+			  ["2015-16", 93],
+			  ["2016-17", 110],
+			  ["2017-18", 84],
+			]);
+
+			var options = {
+				width: 500,			
+				chart: {title: 'Influenza Child Deaths per Year'},
+				legend: { position: 'none' },
+				bars: 'vertical', // Required for Material Bar Charts.
+				colors: ["#f44842"],
+				axes: {
+				x: {
+				  1: { side: 'top', label: 'Percentage'} // Top x-axis.
+				}
+			  },
+			  bar: { groupWidth: "50%" }
+			};
+
+			var chart = new google.charts.Bar(document.getElementById('top_x_div'));
+			chart.draw(data, options);
+		  };
+		  </script>
+		  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+		  <script type="text/javascript">
+		  google.charts.load('current', {'packages':['bar']});
+		  google.charts.setOnLoadCallback(drawStuff);
+
+		  function drawStuff() {
+			var data = new google.visualization.arrayToDataTable([
+			  ['', 'Influenza vaccine effectiveness'],
+			  
+			  ["2014-15", "19%"],
+			  ["2017-18", "36%"],
+			  ["2011-12", "47%"],
+			  ["2016-17", "47%"],
+			  ["2016-17", "47%"],
+			  ["2015-16", "48%"],
+			  ["2012-13", "49%"],
+			  ["2013-14", "51%"],
+			]);
+
+			var options = {
+				width: 500,			
+				chart: {title: 'Influenza Vaccine Effectiveness per Year'},
+				legend: { position: 'none' },
+				bars: 'horizontal', // Required for Material Bar Charts.
+				colors: ["#f44842"],
+				axes: {
+				x: {
+				  0: { side: 'top', label: 'Percentage'} // Top x-axis.
+				}
+			  },
+			  bar: { groupWidth: "50%" }
+			};
+
+			var chart = new google.charts.Bar(document.getElementById('top_y_div'));
+			chart.draw(data, options);
+		  };
+		</script>
+	</head>
+	
+	<body>
+		
+		<nav>	
+			<ul class="navbar">
+			<a href="main-page.html"><h1 class="logo">Project Influenza</h1></a>
+				<li><a class="listitems1" href="map-page.html" >Maps</a></li>
+				<li><a class="listitems2" href="test-page.html" >Symptoms Test</a></li>
+				<li><a class="listitems3" href="about-page.html">About the Flu</a></li>
+			</ul>
+		</nav>
+		<br>
+		<br>
+		<div class="container">
+			<h2><strong>Why is the flu season so bad this year?</strong></h2>
+			<p>In this years flu season, about 7.5% of hospital patients have the flu. As a result of this,
+			some pharmacies and offices have run out of the flu vaccine. Oddly enough, many older seemingly 
+			healthy people have caught the flu. It is estimated that approximately 84 kids and teenagers have 
+			died this year as a result of flu and its consequential problems. It is not clearly understood why
+			this flu season has been so deadly.</p>
+			<br>
+			<h2>Who is at risk?</h2>
+			<p>According to the CDC, approximately 12,000 people die of the flu in a mild year. However, if the 
+			flu for the year is severe, up to 56,000 Americans could die. Furthermore, about 80% of the people are
+			elderly. However, the flu can still target people who suffer from other complications such as heart disease.
+			For this year, the most amount of hospitalizations occur for Americans aged between 50 and 64.</p>
+			<br>
+			<img src="flu.jpg" width="350px" height="150px">
+			<br>
+			<h2>Is this years flu shot effective?</h2>
+			<p>This years flu vaccine is most effective for children aged under 8. The flu vaccine typically works 51% of
+			the time, according to the CDC. Despite this, the flu shot still is not effective in older aged people. However, 
+			even with the 25% overall effectiveness rate, it is still recommended to get the flu shot. These flu shots can be
+			easily done at places such as local pharmacies.</p>
+			<br>
+			<div id="top_x_div" style="width: 400px; height: 500px;"></div>
+			<div id="top_y_div" style="width: 200px; height: 400px;"></div>
+		
+	</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<link href="./main-style.css" type="text/css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Russo+One" rel="stylesheet">
+		<title>Project Influenza</title>
+	<script>
+		
+		function checkSymptoms(){
+			var fever = checkFever.checked
+			var aching = checkAching.checked
+			var CandS = checkCandS.checked
+			var head = checkHead.checked
+			var cough = checkCough.checked
+			var fat = checkFat.checked
+			var nasal = checkNasal.checked
+			var throat = checkThroat.checked
+			
+			var negFever = negativeCheckFever.checked
+			var negAching = negativeCheckAching.checked
+			var negCandS = negativeCheckCandS.checked
+			var negHead = negativeCheckHead.checked
+			var negCough = negativeCheckCough.checked
+			var negFat = negativeCheckFat.checked
+			var negNasal = negativeCheckNasal.checked
+			var negThroat = negativeCheckThroat.checked
+			
+			var counter = 0;
+			var negCounter = 0;
+			
+			if(fever == true){
+				counter += 1;
+			}
+			if(negFever == true){
+				negCounter += 1;
+			}
+			if(aching == true){
+				counter += 1;
+			}
+			if(negAching == true){
+				negCounter += 1;
+			}
+			if(CandS == true){
+				counter += 1;
+			}
+			if(negCandS == true){
+				negCounter += 1;
+			}
+			if(head == true){
+				counter += 1;
+			}
+			if(negHead == true){
+				negCounter += 1;
+			}
+			if(cough == true){
+				counter += 1;
+			}
+			if(negCough == true){
+				negCounter += 1;
+			}
+			if(fat == true){
+				counter += 1;
+			}
+			if(negFat == true){
+				negCounter += 1;
+			}
+			if(nasal == true){
+				counter += 1;
+			}
+			if(negNasal == true){
+				negCounter += 1;
+			}
+			
+			if(throat == true){
+				counter += 1;
+			}
+			if(negThroat == true){
+				negCounter += 1;
+			}
+			
+			if(counter > negCounter){
+				idDivOutput.innerHTML = "Your chance of having the flu is very high! You should see a doctor as soon as you can."
+			}
+			
+			if(counter < negCounter){
+				idDivOutput.innerHTML = "Your chances of having the flu are relativley low, however, you should continue to monitor your health!"
+				
+			}
+			
+			if(negCounter == 8){
+				idDivOutput.innerHTML = "Fear not! You do not have the flu."
+			}
+			
+			if(counter == 8){
+				idDivOutput.innerHTML = "You appear to have the flu! Seek medical attention immediately!"
+			}
+		}
+	
+	
+	
+	</script>
+	</head>
+	<body>
+		<nav>
+			
+			<ul class="navbar">
+				<a href="main-page.html"><h1 class="logo">Project Influenza</h1></a>
+				<li><a class="listitems1" href="map-page.html">Maps</a></li>
+				<li><a class="listitems2" href="test-page.html">Symptoms Test</a></li>
+				<li><a class="listitems3" href="about-page.html">About the Flu</a></li>
+			</ul>
+		</nav>
+		<br>
+		<center>
+		<h2 class="test-symptoms">Please answer whether or not you have each symptom:</h2> <br> 
+		<div class="container1">
+		Do you have a fever over 100.4 F?<br><input type="radio" id="checkFever" name="none">Yes<br>
+		<input type="radio" id="negativeCheckFever" name="none">No<br></br>
+		Do your muscles ache, especially in your back, arms, and legs?<br><input type="radio" id="checkAching" name="none1">Yes<br>
+		<input type="radio" id="negativeCheckAching" name="none1">No<br><br>
+		Do you get chills and sweats?<br><input type="radio" id="checkCandS" name="none3">Yes<br>
+		<input type="radio" id="negativeCheckCandS" name="none3">No<br><br>
+		Do you get a constant headaches?<br><input type="radio" id="checkHead" name="none4">Yes<br>
+		<input type="radio" id="negativeCheckHead" name="none4">No<br><br>
+		Are you coughing a lot?<br><input type="radio" id="checkCough" name="none5">Yes<br>
+		<input type="radio" id="negativeCheckCough" name="none5">No<br><br>
+		Are you feeling fatigued or weak?<br><input type="radio" id="checkFat" name="none6">Yes<br>
+		<input type="radio" id="negativeCheckFat" name="none6">No<br><br>
+		Do you have nasal congestion?<br><input type="radio" id="checkNasal" name="none7">Yes<br>
+		<input type="radio" id="negativeCheckNasal" name="none7">No<br><br>
+		Do you have a sore throat?<br><input type="radio" id="checkThroat" name="none8">Yes<br>
+		<input type="radio" id="negativeCheckThroat" name="none8">No<br><br>
+		<input class="submit-button" type="button" value="Submit" onClick="checkSymptoms()"> <br>
+		<br>
+		</div>
+		<div id="idDivOutput"></div>
+		</center>
+	</body>
+</html>

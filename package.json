@@ -1,0 +1,29 @@
+{
+  "name": "workspace",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "dependencies": {
+    "request": "^2.83.0",
+    "requests": "^0.2.2"
+  },
+  "devDependencies": {
+    "express": "*",
+    "socket.io": "*",
+    "request-promise": "*"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JSneak/node.js-tutorial.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JSneak/node.js-tutorial/issues"
+  },
+  "homepage": "https://github.com/JSneak/node.js-tutorial#readme"
+}
